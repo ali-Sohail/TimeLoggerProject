@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TimeLogger.Models
+﻿namespace TimeLogger.Models
 {
     public class Item
     {

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using TimeLogger.Models;
 
 namespace TimeLogger.Web
 {
@@ -25,7 +20,7 @@ namespace TimeLogger.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSingleton<IItemRepository, ItemRepository>();
+            //services.AddSingleton<IItemRepository, ItemRepository>();
 
             services.AddDbContext<Models.LoggerDBContext>(opt =>
                 opt.UseSqlServer("Server=.;Database=LoggerDB;Trusted_Connection=True;MultipleActiveResultSets=true"));

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace TimeLogger.Web.Models
 {
@@ -22,8 +20,8 @@ namespace TimeLogger.Web.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                //optionsBuilder.UseSqlServer("Server=.;Database=LoggerDB;Trusted_Connection=True;");
+                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Server=.;Database=LoggerDB;Trusted_Connection=True;");
             }
         }
 
@@ -32,6 +30,10 @@ namespace TimeLogger.Web.Models
             modelBuilder.Entity<DayLog>(entity =>
             {
                 entity.Property(e => e.Description).HasMaxLength(50);
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<Profile>(entity =>

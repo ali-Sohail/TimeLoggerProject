@@ -1,10 +1,7 @@
-﻿using System;
-using System.ComponentModel;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
+﻿using System.ComponentModel;
 using TimeLogger.Models;
 using TimeLogger.ViewModels;
+using Xamarin.Forms;
 
 namespace TimeLogger.Views
 {

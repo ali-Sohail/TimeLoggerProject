@@ -1,10 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using TimeLogger.Web.Models;
 
 namespace TimeLogger.Web.Controllers
@@ -79,10 +77,14 @@ namespace TimeLogger.Web.Controllers
         [HttpPost]
         public async Task<ActionResult<DayLog>> PostDayLog(DayLog dayLog)
         {
-            _context.DayLog.Add(dayLog);
-            await _context.SaveChangesAsync();
+            if (_context.Profile.Any(x => x.EmpId == dayLog.UserId))
+            {
+                _context.DayLog.Add(dayLog);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDayLog", new { id = dayLog.Id }, dayLog);
+                return CreatedAtAction("GetDayLog", new { id = dayLog.Id }, dayLog);
+            }
+            return NotFound();
         }
 
         // DELETE: api/DayLogs/5

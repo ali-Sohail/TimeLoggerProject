@@ -1,9 +1,6 @@
-﻿using System;
+﻿using TimeLogger.Services;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using TimeLogger.Services;
-using TimeLogger.Views;
 
 namespace TimeLogger
 {

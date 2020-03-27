@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 using TimeLogger.Models;
 
 namespace TimeLogger.ViewModels

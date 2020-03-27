@@ -2,11 +2,9 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
-using Xamarin.Forms;
-
 using TimeLogger.Models;
 using TimeLogger.Views;
+using Xamarin.Forms;
 
 namespace TimeLogger.ViewModels
 {
