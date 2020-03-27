@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,8 +27,8 @@ namespace TimeLogger.Web
             services.AddControllers();
             services.AddSingleton<IItemRepository, ItemRepository>();
 
-            //services.AddDbContext<Models.Context.UsersDBContext>(opt =>
-            //    opt.UseSqlServer("Server=.;Database=Demo;Trusted_Connection=True;MultipleActiveResultSets=true")
+            services.AddDbContext<Models.LoggerDBContext>(opt =>
+                opt.UseSqlServer("Server=.;Database=LoggerDB;Trusted_Connection=True;MultipleActiveResultSets=true"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
