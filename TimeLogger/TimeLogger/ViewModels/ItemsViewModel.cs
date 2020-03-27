@@ -21,21 +21,21 @@ namespace TimeLogger.ViewModels
 
             MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             {
-                var newItem = item as Item;
+                Item newItem = item;
                 Items.Add(newItem);
                 await DataStore.AddItemAsync(newItem);
             });
         }
 
-        async Task ExecuteLoadItemsCommand()
+        private async Task ExecuteLoadItemsCommand()
         {
             IsBusy = true;
 
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+                System.Collections.Generic.IEnumerable<Item> items = await DataStore.GetItemsAsync(true);
+                foreach (Item item in items)
                 {
                     Items.Add(item);
                 }

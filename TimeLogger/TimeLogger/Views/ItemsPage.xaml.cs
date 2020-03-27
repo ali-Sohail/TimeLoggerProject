@@ -11,7 +11,7 @@ namespace TimeLogger.Views
     [DesignTimeVisible(false)]
     public partial class ItemsPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        private readonly ItemsViewModel viewModel;
 
         public ItemsPage()
         {
@@ -20,14 +20,14 @@ namespace TimeLogger.Views
             BindingContext = viewModel = new ItemsViewModel();
         }
 
-        async void OnItemSelected(object sender, EventArgs args)
+        private async void OnItemSelected(object sender, EventArgs args)
         {
-            var layout = (BindableObject)sender;
-            var item = (Item)layout.BindingContext;
+            BindableObject layout = (BindableObject)sender;
+            Item item = (Item)layout.BindingContext;
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e)
+        private async void AddItem_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
         }
@@ -37,7 +37,9 @@ namespace TimeLogger.Views
             base.OnAppearing();
 
             if (viewModel.Items.Count == 0)
+            {
                 viewModel.IsBusy = true;
+            }
         }
     }
 }

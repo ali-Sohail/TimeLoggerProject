@@ -29,7 +29,7 @@ namespace TimeLogger.Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<DayLog>> GetDayLog(int id)
         {
-            var dayLog = await _context.DayLog.FindAsync(id);
+            DayLog dayLog = await _context.DayLog.FindAsync(id);
 
             if (dayLog == null)
             {
@@ -91,7 +91,7 @@ namespace TimeLogger.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<DayLog>> DeleteDayLog(int id)
         {
-            var dayLog = await _context.DayLog.FindAsync(id);
+            DayLog dayLog = await _context.DayLog.FindAsync(id);
             if (dayLog == null)
             {
                 return NotFound();

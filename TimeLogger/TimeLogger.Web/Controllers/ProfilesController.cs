@@ -29,7 +29,7 @@ namespace TimeLogger.Web.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Profile>> GetProfile(int id)
         {
-            var profile = await _context.Profile.FindAsync(id);
+            Profile profile = await _context.Profile.FindAsync(id);
 
             if (profile == null)
             {
@@ -87,7 +87,7 @@ namespace TimeLogger.Web.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Profile>> DeleteProfile(int id)
         {
-            var profile = await _context.Profile.FindAsync(id);
+            Profile profile = await _context.Profile.FindAsync(id);
             if (profile == null)
             {
                 return NotFound();

@@ -10,7 +10,7 @@ namespace TimeLogger.Views
     [DesignTimeVisible(false)]
     public partial class ItemDetailPage : ContentPage
     {
-        ItemDetailViewModel viewModel;
+        private readonly ItemDetailViewModel viewModel;
 
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {
@@ -23,7 +23,7 @@ namespace TimeLogger.Views
         {
             InitializeComponent();
 
-            var item = new Item
+            Item item = new Item
             {
                 Text = "Item 1",
                 Description = "This is an item description."

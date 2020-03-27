@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLogger.Android", "TimeL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLogger.iOS", "TimeLogger\TimeLogger.iOS\TimeLogger.iOS.csproj", "{5CF25767-882A-4D60-8E26-9309EBC47732}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLogger.Web", "TimeLogger\TimeLogger.Web\TimeLogger.Web.csproj", "{E9D9E40E-23AB-44BD-BE63-4B734144EE4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeLogger.Web", "TimeLogger\TimeLogger.Web\TimeLogger.Web.csproj", "{E9D9E40E-23AB-44BD-BE63-4B734144EE4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimeLogger", "TimeLogger\TimeLogger\TimeLogger.csproj", "{90FFA0D2-DAE7-4B1F-A921-924110026529}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeLogger", "TimeLogger\TimeLogger\TimeLogger.csproj", "{90FFA0D2-DAE7-4B1F-A921-924110026529}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

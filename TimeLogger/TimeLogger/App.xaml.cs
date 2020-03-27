@@ -18,9 +18,14 @@ namespace TimeLogger
             InitializeComponent();
 
             if (UseMockDataStore)
+            {
                 DependencyService.Register<MockDataStore>();
+            }
             else
+            {
                 DependencyService.Register<AzureDataStore>();
+            }
+
             MainPage = new AppShell();
         }
 
