@@ -4,13 +4,15 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using TimeLogger.Models;
 using TimeLogger.Services;
+using TimeLogger.Web.Models;
 using Xamarin.Forms;
 
 namespace TimeLogger.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        //public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        public IDataStore<DayLog> DataStore => DependencyService.Get<IDataStore<DayLog>>();
 
         private bool isBusy = false;
         public bool IsBusy
@@ -27,8 +29,7 @@ namespace TimeLogger.ViewModels
         }
 
         protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName]string propertyName = "",
-            Action onChanged = null)
+            Action onChanged = null, [CallerMemberName]string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(backingStore, value))
             {

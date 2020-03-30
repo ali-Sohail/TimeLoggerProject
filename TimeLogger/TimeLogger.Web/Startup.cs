@@ -20,10 +20,21 @@ namespace TimeLogger.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
             //services.AddSingleton<IItemRepository, ItemRepository>();
 
-            services.AddDbContext<Models.LoggerDBContext>(opt =>
-                opt.UseSqlServer("Server=.;Database=LoggerDB;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            string connectionstring = Configuration.GetConnectionString("LoggerDatabase");
+
+            if (string.IsNullOrEmpty(connectionstring))
+            {
+                services.AddDbContext<Models.LoggerDBContext>(opt =>
+                    opt.UseSqlServer("Server=.;Database=LoggerDB;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            }
+            else
+            {
+                services.AddDbContext<Models.LoggerDBContext>(opt =>
+                    opt.UseSqlServer(connectionstring));
+            }
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,6 +51,12 @@ namespace TimeLogger.Web
             {
                 endpoints.MapControllers();
             });
+
+            // Creating Context Inline
+            //endpoints.MapGet("/", async context =>
+            //{
+            //    await context.Response.WriteAsync($"Hello From {System.Diagnostics.Process.GetCurrentProcess().ProcessName}!");
+            //});
         }
     }
 }

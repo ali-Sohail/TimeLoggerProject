@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using TimeLogger.Web.Models;
@@ -77,6 +78,27 @@ namespace TimeLogger.Web.Controllers
         [HttpPost]
         public async Task<ActionResult<Profile>> PostProfile(Profile profile)
         {
+
+            if (profile.Id > 0)
+            {
+                ValidationProblemDetails validationProblemDetails = new ValidationProblemDetails
+                {
+                    Title = ""
+                };
+
+                return ValidationProblem(validationProblemDetails);
+            }
+
+            if (_context.Profile.Any(x => x.EmpId == profile.EmpId))
+            {
+                ValidationProblemDetails validationProblemDetails = new ValidationProblemDetails
+                {
+                    Title = TimeLogger.Web.Resources.ErrorEmpId,
+                };
+
+                return ValidationProblem(validationProblemDetails);
+            }
+
             _context.Profile.Add(profile);
             await _context.SaveChangesAsync();
 

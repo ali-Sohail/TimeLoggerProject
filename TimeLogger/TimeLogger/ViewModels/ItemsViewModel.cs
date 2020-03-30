@@ -23,7 +23,7 @@ namespace TimeLogger.ViewModels
             {
                 Item newItem = item;
                 Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
+                //await DataStore.AddItemAsync(newItem);
             });
         }
 
@@ -34,11 +34,11 @@ namespace TimeLogger.ViewModels
             try
             {
                 Items.Clear();
-                System.Collections.Generic.IEnumerable<Item> items = await DataStore.GetItemsAsync(true);
-                foreach (Item item in items)
-                {
-                    Items.Add(item);
-                }
+                //System.Collections.Generic.IEnumerable<Item> items = await DataStore.GetItemsAsync(true);
+                //foreach (Item item in items)
+                //{
+                //    Items.Add(item);
+                //}
             }
             catch (Exception ex)
             {

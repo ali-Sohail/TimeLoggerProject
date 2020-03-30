@@ -5,14 +5,16 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using TimeLogger.Models;
+using TimeLogger.Web.Models;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace TimeLogger.Services
 {
-    public class AzureDataStore : IDataStore<Item>
+    public class AzureDataStore : IDataStore<DayLog>
     {
         private readonly HttpClient client;
-        private IEnumerable<Item> items;
+        private IEnumerable<DayLog> items;
 
         public AzureDataStore()
         {
@@ -21,33 +23,38 @@ namespace TimeLogger.Services
                 BaseAddress = new Uri($"{App.AzureBackendUrl}/")
             };
 
-            items = new List<Item>();
+            items = new List<DayLog>();
         }
 
         private bool IsConnected => Connectivity.NetworkAccess == NetworkAccess.Internet;
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<DayLog>> GetItemsAsync(bool forceRefresh = false)
         {
-            if (forceRefresh && IsConnected)
+            try
             {
-                string json = await client.GetStringAsync($"api/item");
-                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Item>>(json));
+                if (forceRefresh && IsConnected)
+                {
+                    string json = await client.GetStringAsync($"api/DayLogs");
+                    items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<DayLog>>(json));
+                }
+                return items;
             }
-
-            return items;
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<DayLog> GetItemAsync(string id)
         {
             if (id != null && IsConnected)
             {
-                string json = await client.GetStringAsync($"api/item/{id}");
-                return await Task.Run(() => JsonConvert.DeserializeObject<Item>(json));
+                string json = await client.GetStringAsync($"api/DayLogs/{id}");
+                return await Task.Run(() => JsonConvert.DeserializeObject<DayLog>(json));
             }
-
             return null;
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(DayLog item)
         {
             if (item == null || !IsConnected)
             {
@@ -56,14 +63,14 @@ namespace TimeLogger.Services
 
             string serializedItem = JsonConvert.SerializeObject(item);
 
-            HttpResponseMessage response = await client.PostAsync($"api/item", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
+            HttpResponseMessage response = await client.PostAsync($"api/DayLogs", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
 
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(DayLog item)
         {
-            if (item == null || item.Id == null || !IsConnected)
+            if (item == null || !IsConnected)
             {
                 return false;
             }
@@ -72,7 +79,7 @@ namespace TimeLogger.Services
             byte[] buffer = Encoding.UTF8.GetBytes(serializedItem);
             ByteArrayContent byteContent = new ByteArrayContent(buffer);
 
-            HttpResponseMessage response = await client.PutAsync(new Uri($"api/item/{item.Id}"), byteContent);
+            HttpResponseMessage response = await client.PutAsync(new Uri($"api/DayLogs/{item.Id}"), byteContent);
 
             return response.IsSuccessStatusCode;
         }
@@ -84,7 +91,7 @@ namespace TimeLogger.Services
                 return false;
             }
 
-            HttpResponseMessage response = await client.DeleteAsync($"api/item/{id}");
+            HttpResponseMessage response = await client.DeleteAsync($"api/DayLogs/{id}");
 
             return response.IsSuccessStatusCode;
         }
