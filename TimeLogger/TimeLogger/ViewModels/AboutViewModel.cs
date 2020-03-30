@@ -4,14 +4,14 @@ using Xamarin.Forms;
 
 namespace TimeLogger.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+  public class AboutViewModel : BaseViewModel
+  {
+    public AboutViewModel()
     {
-        public AboutViewModel()
-        {
-            Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://xamarin.com"));
-        }
-
-        public ICommand OpenWebCommand { get; }
+      Title = "About";
+      OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://xamarin.com"));
     }
+
+    public ICommand OpenWebCommand { get; }
+  }
 }

@@ -3,14 +3,14 @@ using Xamarin.Forms;
 
 namespace TimeLogger.Views
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
-    // by visiting https://aka.ms/xamarinforms-previewer
-    [DesignTimeVisible(false)]
-    public partial class AboutPage : ContentPage
+  // Learn more about making custom code visible in the Xamarin.Forms previewer
+  // by visiting https://aka.ms/xamarinforms-previewer
+  [DesignTimeVisible(false)]
+  public partial class AboutPage : ContentPage
+  {
+    public AboutPage()
     {
-        public AboutPage()
-        {
-            InitializeComponent();
-        }
+      InitializeComponent();
     }
+  }
 }
