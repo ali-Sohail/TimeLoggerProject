@@ -44,7 +44,8 @@ namespace TimeLogger.Web
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //
+            //app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

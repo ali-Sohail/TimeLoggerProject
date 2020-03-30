@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TimeLogger.Models;
 using TimeLogger.Web.Models;
@@ -20,7 +21,8 @@ namespace TimeLogger.Services
         {
             client = new HttpClient
             {
-                BaseAddress = new Uri($"{App.AzureBackendUrl}/")
+                BaseAddress = new Uri($"{App.AzureBackendUrl}/"),
+                Timeout = new TimeSpan(0,0,10)
             };
 
             items = new List<DayLog>();
@@ -34,12 +36,15 @@ namespace TimeLogger.Services
                 if (forceRefresh && IsConnected)
                 {
                     string json = await client.GetStringAsync($"api/DayLogs");
+                    await App.Current.MainPage.DisplayAlert("Success", $"Response {json}", "Ok");
                     items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<DayLog>>(json));
                 }
                 return items;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                await App.Current.MainPage.DisplayAlert("Failed", $"Exception {ex.Message}", "Ok");
+                System.Diagnostics.Debug.WriteLine($" {ex.Message}");
                 throw;
             }
         }

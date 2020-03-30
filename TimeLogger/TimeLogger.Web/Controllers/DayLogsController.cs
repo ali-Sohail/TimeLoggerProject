@@ -35,7 +35,6 @@ namespace TimeLogger.Web.Controllers
             {
                 return NotFound();
             }
-
             return dayLog;
         }
 
