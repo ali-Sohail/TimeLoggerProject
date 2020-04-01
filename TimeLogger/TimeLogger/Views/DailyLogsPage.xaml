@@ -4,20 +4,44 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+			 xmlns:skia="clr-namespace:SkiaSharp;assembly=SkiaSharp"
+             xmlns:skiaforms="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              xmlns:vm="clr-namespace:TimeLogger.ViewModels"
-             x:Class="TimeLogger.Views.DailyLogsPage">
+             x:Class="TimeLogger.Views.DailyLogsPage"
+			 Title="{Binding DayLog.Description}">
     <ContentPage.BindingContext>
         <vm:DailyLogsPageViewModel/>
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+		<Grid>
 
-            <Label Text="{Binding Title}" />
-            <Button Text="Update" Command="{Binding UpdateCommand}"/>
-        </StackLayout>
+			<skiaforms:SKCanvasView x:Name="canvas" BindingContext="{Binding SKCanvasView}"
+				Grid.Row="0" Grid.Column="0"
+				VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+				
+			</skiaforms:SKCanvasView>
+
+			<StackLayout Padding="10" Grid.Row="0" Grid.Column="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+				<Label Text="{Binding DayLog.Description}"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+				   FontSize="Large"/>
+
+				<Button Text="InTime" HeightRequest="150" WidthRequest="150"
+					CornerRadius="75" HorizontalOptions="Center"
+					VerticalOptions="Center" BackgroundColor="Bisque"/>
+
+				<BoxView HeightRequest="100"/>
+
+				<Button Text="OutTime" HeightRequest="150" WidthRequest="150"
+					CornerRadius="75" HorizontalOptions="Center"
+					VerticalOptions="Center" BackgroundColor="AliceBlue"/>
+				<BoxView HeightRequest="100"/>
+			</StackLayout>
+		</Grid>
+		
+        
     </ContentPage.Content>
 </ContentPage>

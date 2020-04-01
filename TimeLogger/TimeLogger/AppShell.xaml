@@ -5,7 +5,7 @@
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="d"
        xmlns:local="clr-namespace:TimeLogger.Views"
-       Title="TimeLogger"
+       Title="TimeLogger" Shell.NavBarIsVisible="False"
        x:Class="TimeLogger.AppShell">
 
     <!-- 
