@@ -11,48 +11,48 @@ namespace TimeLogger.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DayLogsController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly LoggerDBContext _context;
 
-        public DayLogsController(LoggerDBContext context)
+        public UsersController(LoggerDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/DayLogs
+        // GET: api/Users
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DayLog>>> GetDayLog()
+        public async Task<ActionResult<IEnumerable<User>>> GetUser()
         {
-            return await _context.DayLog.ToListAsync();
+            return await _context.User.ToListAsync();
         }
 
-        // GET: api/DayLogs/5
+        // GET: api/Users/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DayLog>> GetDayLog(int id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
-            var dayLog = await _context.DayLog.FindAsync(id);
+            var user = await _context.User.FindAsync(id);
 
-            if (dayLog == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return dayLog;
+            return user;
         }
 
-        // PUT: api/DayLogs/5
+        // PUT: api/Users/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDayLog(int id, DayLog dayLog)
+        public async Task<IActionResult> PutUser(int id, User user)
         {
-            if (id != dayLog.Id)
+            if (id != user.UserId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(dayLog).State = EntityState.Modified;
+            _context.Entry(user).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace TimeLogger.Web.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DayLogExists(id))
+                if (!UserExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace TimeLogger.Web.Controllers
             return NoContent();
         }
 
-        // POST: api/DayLogs
+        // POST: api/Users
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        public async Task<ActionResult<DayLog>> PostDayLog(DayLog dayLog)
+        public async Task<ActionResult<User>> PostUser(User user)
         {
-            _context.DayLog.Add(dayLog);
+            _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDayLog", new { id = dayLog.Id }, dayLog);
+            return CreatedAtAction("GetUser", new { id = user.UserId }, user);
         }
 
-        // DELETE: api/DayLogs/5
+        // DELETE: api/Users/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<DayLog>> DeleteDayLog(int id)
+        public async Task<ActionResult<User>> DeleteUser(int id)
         {
-            var dayLog = await _context.DayLog.FindAsync(id);
-            if (dayLog == null)
+            var user = await _context.User.FindAsync(id);
+            if (user == null)
             {
                 return NotFound();
             }
 
-            _context.DayLog.Remove(dayLog);
+            _context.User.Remove(user);
             await _context.SaveChangesAsync();
 
-            return dayLog;
+            return user;
         }
 
-        private bool DayLogExists(int id)
+        private bool UserExists(int id)
         {
-            return _context.DayLog.Any(e => e.Id == id);
+            return _context.User.Any(e => e.UserId == id);
         }
     }
 }
