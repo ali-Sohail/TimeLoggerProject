@@ -12,7 +12,7 @@ namespace TimeLogger.Web.Models
 
 		public int EmpId { get; set; }
 		public string Name { get; set; }
-		public DateTime? DateOfBirth { get; set; }
+		public DateTimeOffset? DateOfBirth { get; set; }
 		public string Designation { get; set; }
 		public double? Experience { get; set; }
 		public string Token { get; set; }

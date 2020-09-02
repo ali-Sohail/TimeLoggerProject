@@ -14,8 +14,6 @@ namespace TimeLogger.Web.Models
 		public DateTimeOffset InTime { get; set; }
 
 		public DateTimeOffset? OutTime { get; set; }
-
-		[Required]
 		public string Description { get; set; }
 
 		public virtual Profile Emp { get; set; }

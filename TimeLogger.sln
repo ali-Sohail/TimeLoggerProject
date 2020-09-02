@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeLogger.Web", "TimeLogge
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TimeLogger", "TimeLogger\TimeLogger\TimeLogger.csproj", "{90FFA0D2-DAE7-4B1F-A921-924110026529}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TimeLogger.Database", "TimeLogger.Database\TimeLogger.Database.sqlproj", "{BFF475BD-D454-4C43-9471-67A4A4472F17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,24 @@ Global
 		{90FFA0D2-DAE7-4B1F-A921-924110026529}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{90FFA0D2-DAE7-4B1F-A921-924110026529}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{90FFA0D2-DAE7-4B1F-A921-924110026529}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Debug|iPhone.Deploy.0 = Debug|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Release|iPhone.Build.0 = Release|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Release|iPhone.Deploy.0 = Release|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{BFF475BD-D454-4C43-9471-67A4A4472F17}.Release|iPhoneSimulator.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
