@@ -1,10 +1,10 @@
 ﻿namespace TimeLogger
 {
-  public partial class AppShell : Xamarin.Forms.Shell
-  {
-    public AppShell()
+    public partial class AppShell : Xamarin.Forms.Shell
     {
-      InitializeComponent();
+        public AppShell()
+        {
+            InitializeComponent();
+        }
     }
-  }
 }

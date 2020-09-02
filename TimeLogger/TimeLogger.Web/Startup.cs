@@ -5,118 +5,115 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using TimeLogger.Web.Services;
 
 namespace TimeLogger.Web
 {
-	public class Startup
-	{
-		public Startup(IConfiguration configuration	)
-		{	
-			Configuration = configuration;
-		}
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddCors();
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddCors();
 
-			services.AddControllers();
-			
-			//services.AddSingleton<IMyService>((container) =>
-			//{
-			//	var logger = container.GetRequiredService<ILogger<MyService>>();
-			//	return new MyService() { Logger = logger };
-			//}); 
+            services.AddControllers();
 
-			//services.AddSingleton<IItemRepository, ItemRepository>();
+            //services.AddSingleton<IMyService>((container) =>
+            //{
+            //	var logger = container.GetRequiredService<ILogger<MyService>>();
+            //	return new MyService() { Logger = logger };
+            //});
 
-			services.AddDbContext<Models.LoggerDBContext>(opt =>
-				opt.UseSqlServer(Configuration.GetConnectionString("LoggerDatabase")));
+            //services.AddSingleton<IItemRepository, ItemRepository>();
 
-			// configure strongly typed settings objects
+            services.AddDbContext<Models.LoggerDBContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("LoggerDatabase")));
 
-		 
-			var appSettingsSection = Configuration.GetSection("AppSettings");
+            // configure strongly typed settings objects
 
-			services.Configure<Helpers.AppSettings>(appSettingsSection);
+            var appSettingsSection = Configuration.GetSection("AppSettings");
 
-			var appSettings = appSettingsSection.Get<Helpers.AppSettings>();
+            services.Configure<Helpers.AppSettings>(appSettingsSection);
 
-			var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-			services.AddAuthentication(x =>
-			{
-				x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-				x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-			})
-			.AddJwtBearer(x =>
-			{
-				x.RequireHttpsMetadata = false;
-				x.SaveToken = true;
-				x.TokenValidationParameters = new TokenValidationParameters
-				{
-					ValidateIssuerSigningKey = true,
-					IssuerSigningKey = new SymmetricSecurityKey(key),
-					ValidateIssuer = false,
-					ValidateAudience = false
-				};
-			});
+            var appSettings = appSettingsSection.Get<Helpers.AppSettings>();
 
-			// configure DI for application services
-			services.AddScoped<IUserService, UserService>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
-			try
-			{
-				using (var context = new Models.LoggerDBContext())
-				{
-					// Create Database if not Created
-					context.Database.EnsureCreated();
-				}
-			}
-			catch (System.Exception)
-			{
-				throw;
-			}
-		}
+            // configure DI for application services
+            services.AddScoped<IUserService, UserService>();
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, ILogger logger*/)
-		{
-			if (env.IsDevelopment())
-			{
-				//logger.LogInformation("In Development environment");	
-				app.UseDeveloperExceptionPage();
-			}
+            try
+            {
+                using (var context = new Models.LoggerDBContext())
+                {
+                    // Create Database if not Created
+                    context.Database.EnsureCreated();
+                }
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
+        }
 
-			app.UseRouting();
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env/*, ILogger logger*/)
+        {
+            if (env.IsDevelopment())
+            {
+                //logger.LogInformation("In Development environment");
+                app.UseDeveloperExceptionPage();
+            }
 
-			// global cors policy
-			app.UseCors(x => x
-				.AllowAnyOrigin()
-				.AllowAnyMethod()
-				.AllowAnyHeader());
+            app.UseRouting();
 
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
-			// Redirection of HTTP to HTTPS
-			//app.UseHttpsRedirection();
+            // Redirection of HTTP to HTTPS
+            //app.UseHttpsRedirection();
 
-			app.UseAuthentication();
-			app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllers();
-			});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
-			// Creating Context Inline
-			//endpoints.MapGet("/", async context =>
-			//{
-			//    await context.Response.WriteAsync($"Hello From {System.Diagnostics.Process.GetCurrentProcess().ProcessName}!");
-			//});
-		}
-	}
+            // Creating Context Inline
+            //endpoints.MapGet("/", async context =>
+            //{
+            //    await context.Response.WriteAsync($"Hello From {System.Diagnostics.Process.GetCurrentProcess().ProcessName}!");
+            //});
+        }
+    }
 }

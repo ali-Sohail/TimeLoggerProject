@@ -28,12 +28,12 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10">
-                        <Label Text="{Binding Text}" 
+                        <Label Text="{Binding Text}"
                                 d:Text="{Binding .}"
-                                LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemTextStyle}"
                                 FontSize="16" />
-                        <Label Text="{Binding Description}" 
+                        <Label Text="{Binding Description}"
                                 d:Text="Item descripton"
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
@@ -45,5 +45,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </RefreshView> 
+    </RefreshView>
 </ContentPage>

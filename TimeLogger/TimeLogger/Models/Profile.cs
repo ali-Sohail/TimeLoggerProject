@@ -2,8 +2,8 @@
 
 namespace TimeLogger.Web.Models
 {
-	public partial class Profile /*: Realms.RealmObject*/
-	{
+    public partial class Profile /*: Realms.RealmObject*/
+    {
         public int EmpId { get; set; }
         public string Name { get; set; }
         public DateTimeOffset? DateOfBirth { get; set; }
@@ -12,6 +12,5 @@ namespace TimeLogger.Web.Models
         public string Token { get; set; }
         public int? UserId { get; set; }
         public string Password { get; set; }
-
     }
 }

@@ -2,8 +2,8 @@
 
 namespace TimeLogger.Web.Models
 {
-	public partial class DayLog/*	: Realms.RealmObject*/
-	{
+    public partial class DayLog/*	: Realms.RealmObject*/
+    {
         public int Id { get; set; }
         public int EmpId { get; set; }
         public DateTimeOffset InTime { get; set; }
